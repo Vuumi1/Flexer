@@ -6,20 +6,21 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="CSS/normalize.css">
-    <link rel="stylesheet" href="CSS/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="CSS/main.css" id="main-css">
+
+
 </head>
 <body>
-
     <div class="container">
-        <textarea name="" id="codeWindow"></textarea>
-        <button onclick="getCode()">Apply</button>
+        <div class="level-one">
+            <div class="codeWindows">
+                <div id="parentCodeWindow"></div>
+            </div>
+        </div>
     </div>
 
 
-    <!--Code Mirror Library for the CSS code window-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
-    <script src="Javascript/index.js"></script>
+    <!--main js script-->
+    <script type="module" src="Javascript/index.js"></script>
 </body>
 </html>

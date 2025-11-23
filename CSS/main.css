@@ -6,8 +6,15 @@
 }
 
 
-.CodeMirror {
-    border: 0.2rem solid #ED3C3F;
-    min-width: 700px;
-    border-radius: 1rem;
+
+
+#parentCodeWindow {
+    width: 500px;
+    height: 500px;
+    border: 0.20rem solid #E10600;
+    border-radius: 0.7rem;
+}
+#parentCodeWindow .cm-editor {
+    width: 100%;
+    height: 100%;
 }
