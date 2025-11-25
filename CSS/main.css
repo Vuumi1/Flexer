@@ -87,3 +87,25 @@ body {
 .level-1 .parent-square .child-square:last-child {
     align-self: flex-end;
 }
+
+
+
+
+/*LEVEL TWO*/
+.level-2 {
+    display: none;
+}
+.level-2 .parent-square .child-square {
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-2 .parent-square .child-square:first-child {
+    align-self: flex-start;
+}
+.level-2 .parent-square .child-square:nth-child(2) {
+    align-self: flex-start;
+}
+.level-2 .parent-square .child-square:last-child {
+    align-self: flex-start;
+}

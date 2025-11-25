@@ -9,21 +9,34 @@ const allowedCodeWords = ["child-square","parent-square","display","flex","inlin
 let levelCounter = 0;
 let levelStarter = [`.parent-square {
     
-    }`]
+    }`, `.parent-square {
+    
+    }`];
 
 
 
-const cssEditor = new EditorView({
+let cssEditor = new EditorView({
     doc: levelStarter[levelCounter],
     extensions: [basicSetup, css()],
     parent: document.getElementById("parentCodeWindow")
 });
 function levelProgressFunc() {
-    cssEditor = new EditorView({
-        doc: levelStarter[levelCounter],
-        extensions: [basicSetup, css()],
-        parent: document.getElementById("parentCodeWindow")
-    });
+    if (document.querySelector(`.level-${levelCounter + 2}`)) {
+        // hiding current level
+        document.querySelector(`.level-${levelCounter + 1}`).style.display = "none";
+        levelCounter++;
+        // showing next level
+        document.querySelector(`.level-${levelCounter + 1}`).style.display = "block";
+        cssEditor.dispatch({
+            changes: {
+                from: 0,
+                to: cssEditor.state.doc.length,
+                insert: levelStarter[levelCounter],
+            }
+        })
+    } else {
+        console.log("You Won!, but there is no next level for now")
+    }
 }
 
 
@@ -54,16 +67,28 @@ function applyCode() {
         return;
     }
 
-    styleSheet.insertRule(writtenCode, styleSheet.cssRules.length);
-    let miniBoxes = document.querySelectorAll(".parent-square .child-square");
+    styleSheet.insertRule(`.level-${levelCounter + 1} ` + writtenCode, styleSheet.cssRules.length);
+    let miniBoxes = document.querySelectorAll(`.level-${levelCounter + 1} .parent-square .child-square`);
     miniBoxes.forEach((miniBox) => {miniBox.style.alignSelf = "auto";});
     
     let winCondition;
-    winCondition = levelOneWinCondition();
+
+
+
+    switch(levelCounter) {
+        // level one
+        case 0:
+        winCondition = levelOneWinCondition();
+        break;
+
+        // level two
+        case 1:
+        winCondition = levelTwoWinCondition();
+        break;
+    }
 
     if (winCondition === true) {
-        levelCounter++;
-        console.log(levelCounter);
+        setTimeout(levelProgressFunc, 1500)
     } else {
         document.querySelector("p.wrong").style.display = "block";
     }
@@ -75,10 +100,23 @@ function applyCode() {
 
 
 function levelOneWinCondition() {
-    // checking if all flex elements are at center
-    let squareParent = document.querySelector(".parent-square");
+    // checking if all mini squares are at center
+    let squareParent = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
 
-    if (getComputedStyle(squareParent).alignItems === "center") {
+    if (getComputedStyle(squareParent).alignItems === "center" && getComputedStyle(squareParent).flexDirection === "row") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function levelTwoWinCondition() {
+    // checking if all mini squares at the bottom
+    let squareParent = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
+
+
+    if (getComputedStyle(squareParent).alignItems === "flex-end" && getComputedStyle(squareParent).flexDirection === "row") {
         return true;
     } else {
         return false;
