@@ -25,17 +25,27 @@ applyButton.addEventListener("click", () => {applyCode()})
 
 
 function checkCode(code) {
-    const allCodeWords = code.toLowerCase().match(/[a-z-]+/g)
-    console.log(allCodeWords);
+    const allCodeWords = code.toLowerCase().match(/[a-z-]+/g);
+
+
+    for (let i = 0; i < allCodeWords.length; i++) {
+        if (!allowedCodeWords.includes(allCodeWords[i])) {
+            return false;
+        }
+    }
 }
 
 
 function applyCode() {
     const writtenCode = cssEditor.state.doc.toString();
+    let errorMSG = document.querySelector("p.error");
+    if (checkCode(writtenCode) === false) {
+        errorMSG.style.display = "block";
+        errorMSG.innerText = "You Can Only Use Flex Properties."
+        return;
+    }
+
     styleSheet.insertRule(writtenCode, styleSheet.cssRules.length);
-    checkCode(writtenCode)
-
-
     let miniBoxes = document.querySelectorAll(".parent-square .child-square");
     miniBoxes.forEach((miniBox) => {miniBox.style.alignSelf = "auto";})
 }

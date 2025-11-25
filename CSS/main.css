@@ -28,6 +28,16 @@ body {
     border-radius: 10px;
     cursor: pointer;
 }
+.level p.error {
+    text-align: center;
+    color: #FF7276;
+    font-size: 18px;
+    display: none;
+}
+
+
+
+
 
 
 #parentCodeWindow {
