@@ -1,15 +1,33 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
 .container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.level {
+
+.level .level-content {
     display: flex;
     min-width: 1000px;
     gap: 10px;
 }
-
+.level button.apply-btn {
+    width: 100%;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 30px;
+    background-color: #E10600;
+    padding: 10px 0px;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
 
 #parentCodeWindow {
@@ -27,7 +45,7 @@
 
 
 
-.square {
+.parent-square {
     aspect-ratio: 1 / 1;
     background-color: #ddd;
     border: 3px solid black;
@@ -36,17 +54,17 @@
     align-items: center;
     gap: 5px;
 }
-.square .min-squares {
+.parent-square .child-square {
     width: calc(100% / 3);
     aspect-ratio: 1 / 1;
     background-color: red;
 }
-.square .min-squares:first-child {
+.parent-square .child-square:first-child {
     align-self: flex-start;
 }
-.square .min-squares:nth-child(2) {
+.parent-square .child-square:nth-child(2) {
     align-self: center;
 }
-.square .min-squares:last-child {
+.parent-square .child-square:last-child {
     align-self: flex-end;
 }
