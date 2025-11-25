@@ -10,12 +10,13 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.level .level-content {
+.game .game-content {
     display: flex;
     min-width: 1000px;
     gap: 10px;
+    align-items: center;
 }
-.level button.apply-btn {
+.game button.apply-btn {
     width: 100%;
     outline: none;
     border: none;
@@ -28,7 +29,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
 }
-.level p.error, .level p.wrong {
+.game p.error, .game p.wrong {
     text-align: center;
     color: #FF7276;
     font-size: 18px;
@@ -51,6 +52,11 @@ body {
 }
 
 
+.game .level {
+    flex-basis: 50%;
+}
+
+
 
 
 
@@ -58,21 +64,26 @@ body {
     aspect-ratio: 1 / 1;
     background-color: #ddd;
     border: 3px solid black;
-    flex-basis: 50%;
     display: flex;
     gap: 5px;
 }
-.parent-square .child-square {
+
+
+
+
+
+/*LEVEL ONE*/
+.level-1 .parent-square .child-square {
     width: calc(100% / 3);
     aspect-ratio: 1 / 1;
     background-color: red;
 }
-.parent-square .child-square:first-child {
+.level-1 .parent-square .child-square:first-child {
     align-self: flex-start;
 }
-.parent-square .child-square:nth-child(2) {
+.level-1 .parent-square .child-square:nth-child(2) {
     align-self: center;
 }
-.parent-square .child-square:last-child {
+.level-1 .parent-square .child-square:last-child {
     align-self: flex-end;
 }
