@@ -6,17 +6,26 @@ let styleSheet = document.getElementById("main-css").sheet;
 const applyButton = document.querySelector("button.apply-btn")
 const allowedCodeWords = ["child-square","parent-square","display","flex","inline-flex","flex-direction","row","row-reverse","column","column-reverse","flex-wrap","nowrap","wrap","wrap-reverse","flex-flow","justify-content","flex-start","flex-end","center","space-between","space-around","space-evenly","align-items","stretch","baseline","align-content","flex-grow","flex-shrink","flex-basis","auto","none","initial","align-self","order",];
 
-
+let levelCounter = 0;
 let levelStarter = [`.parent-square {
     
     }`]
 
 
+
 const cssEditor = new EditorView({
-    doc: levelStarter[0],
+    doc: levelStarter[levelCounter],
     extensions: [basicSetup, css()],
     parent: document.getElementById("parentCodeWindow")
 });
+function levelProgressFunc() {
+    cssEditor = new EditorView({
+        doc: levelStarter[levelCounter],
+        extensions: [basicSetup, css()],
+        parent: document.getElementById("parentCodeWindow")
+    });
+}
+
 
 
 
@@ -47,8 +56,31 @@ function applyCode() {
 
     styleSheet.insertRule(writtenCode, styleSheet.cssRules.length);
     let miniBoxes = document.querySelectorAll(".parent-square .child-square");
-    miniBoxes.forEach((miniBox) => {miniBox.style.alignSelf = "auto";})
+    miniBoxes.forEach((miniBox) => {miniBox.style.alignSelf = "auto";});
+    
+    let winCondition;
+    winCondition = levelOneWinCondition();
+
+    if (winCondition === true) {
+        levelCounter++;
+        console.log(levelCounter);
+    } else {
+        document.querySelector("p.wrong").style.display = "block";
+    }
 }
 
 
 
+
+
+
+function levelOneWinCondition() {
+    // checking if all flex elements are at center
+    let squareParent = document.querySelector(".parent-square");
+
+    if (getComputedStyle(squareParent).alignItems === "center") {
+        return true;
+    } else {
+        return false;
+    }
+}
