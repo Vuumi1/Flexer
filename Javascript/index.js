@@ -4,12 +4,24 @@ import { css } from "https://esm.sh/@codemirror/lang-css@6.2.1";
 
 let styleSheet = document.getElementById("main-css").sheet;
 const applyButton = document.querySelector("button.apply-btn")
-const allowedCodeWords = ["child-square","parent-square","display","flex","inline-flex","flex-direction","row","row-reverse","column","column-reverse","flex-wrap","nowrap","wrap","wrap-reverse","flex-flow","justify-content","flex-start","flex-end","center","space-between","space-around","space-evenly","align-items","stretch","baseline","align-content","flex-grow","flex-shrink","flex-basis","auto","none","initial","align-self","order",];
+const allowedCodeWords = ["nth-child" ,"last-child" ,"first-child" ,"child-square","parent-square","display","flex","inline-flex","flex-direction","row","row-reverse","column","column-reverse","flex-wrap","nowrap","wrap","wrap-reverse","flex-flow","justify-content","flex-start","flex-end","center","space-between","space-around","space-evenly","align-items","stretch","baseline","align-content","flex-grow","flex-shrink","flex-basis","auto","none","initial","align-self","order",];
 
 let levelCounter = 0;
-let levelStarter = [`.parent-square {
+let levelStarter = [`.level-${levelCounter + 1} .parent-square {
     
-    }`, `.parent-square {
+    }`, `.level-${levelCounter + 2} .parent-square {
+    
+    }`, `.level-${levelCounter + 3} .parent-square {
+    
+    }`, `.level-${levelCounter + 4} .parent-square .child-square:first-child {
+    
+    }
+    
+    .level-${levelCounter + 4} .parent-square .child-square:nth-child(2) {
+    
+    }
+    
+    .level-${levelCounter + 4} .parent-square .child-square:last-child {
     
     }`];
 
@@ -51,6 +63,10 @@ function checkCode(code) {
 
 
     for (let i = 0; i < allCodeWords.length; i++) {
+        console.log(allCodeWords[i])
+        if (allCodeWords[i] === "level-") {
+            continue;
+        }
         if (!allowedCodeWords.includes(allCodeWords[i])) {
             return false;
         }
@@ -60,6 +76,7 @@ function checkCode(code) {
 
 function applyCode() {
     const writtenCode = cssEditor.state.doc.toString();
+    let CSSrule = "";
     let errorMSG = document.querySelector("p.error");
     if (checkCode(writtenCode) === false) {
         errorMSG.style.display = "block";
@@ -67,9 +84,22 @@ function applyCode() {
         return;
     }
 
-    styleSheet.insertRule(`.level-${levelCounter + 1} ` + writtenCode, styleSheet.cssRules.length);
+
+    for (let i = 0; i < writtenCode.length; i++) {
+        CSSrule = CSSrule + writtenCode[i];
+
+        if (writtenCode[i] === "}") {
+            styleSheet.insertRule(CSSrule, styleSheet.cssRules.length);
+            CSSrule = "";
+        }
+    }
     let miniBoxes = document.querySelectorAll(`.level-${levelCounter + 1} .parent-square .child-square`);
-    miniBoxes.forEach((miniBox) => {miniBox.style.alignSelf = "auto";});
+    let parentBox = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
+
+    if (getComputedStyle(parentBox).alignItems !== "stretch" && getComputedStyle(parentBox).alignItems !== "normal") {
+        console.log("test", getComputedStyle(parentBox).alignItems)
+        miniBoxes.forEach((miniBox) => {miniBox.style.alignSelf = "auto";});
+    }
     
     let winCondition;
 
@@ -84,6 +114,16 @@ function applyCode() {
         // level two
         case 1:
         winCondition = levelTwoWinCondition();
+        break;
+
+        // level three
+        case 2:
+        winCondition = levelThreeWinCondition();
+        break;
+
+        // level four
+        case 3:
+        winCondition = levelFourWinCondition();
         break;
     }
 
@@ -117,6 +157,36 @@ function levelTwoWinCondition() {
 
 
     if (getComputedStyle(squareParent).alignItems === "flex-end" && getComputedStyle(squareParent).flexDirection === "row") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+function levelThreeWinCondition() {
+    // checking if all mini squares are vertically centered
+    let squareParent = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
+
+
+
+    if (getComputedStyle(squareParent).alignItems === "center" && getComputedStyle(squareParent).flexDirection === "column") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+function levelFourWinCondition() {
+    // checking if first square is top right, second is middle, third is bottom left
+    let firstMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:first-child`);
+    let secondMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(2)`);
+    let thirdMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
+
+    if (getComputedStyle(firstMiniSquare).alignSelf === "flex-start" && getComputedStyle(secondMiniSquare).alignSelf === "center" && getComputedStyle(thirdMiniSquare).alignSelf === "flex-end") {
         return true;
     } else {
         return false;

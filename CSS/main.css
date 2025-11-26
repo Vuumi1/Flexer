@@ -109,3 +109,76 @@ body {
 .level-2 .parent-square .child-square:last-child {
     align-self: flex-start;
 }
+
+
+
+
+
+
+/*LEVEL THREE*/
+.level-3 {
+    display: none;
+}
+.level-3 .parent-square .child-square {
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-3 .parent-square .child-square:first-child {
+    align-self: center;
+}
+.level-3 .parent-square .child-square:nth-child(2) {
+    align-self: center;
+}
+.level-3 .parent-square .child-square:last-child {
+    align-self: center;
+}
+
+
+
+
+
+
+/*LEVEL FOUR*/
+.level-4 {
+    display: none;
+}
+.level-4 .parent-square .child-square {
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-4 .parent-square .child-square:first-child {
+    align-self: center;
+}
+.level-4 .parent-square .child-square:nth-child(2) {
+    align-self: center;
+}
+.level-4 .parent-square .child-square:last-child {
+    align-self: center;
+}
+
+
+
+
+
+
+
+/*LEVEL FIVE*/
+.level-5 {
+    display: none;
+}
+.level-5 .parent-square .child-square {
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-5 .parent-square .child-square:first-child {
+    align-self: center;
+}
+.level-5 .parent-square .child-square:nth-child(2) {
+    align-self: center;
+}
+.level-5 .parent-square .child-square:last-child {
+    align-self: center;
+}
