@@ -73,6 +73,28 @@ let levelStarter = [`.level-${levelCounter + 1} .parent-square {
 
     .level-${levelCounter + 9} .parent-square .child-square:nth-child(3) {
     
+    }`, `.level-${levelCounter + 10} .parent-square {
+    
+    }
+    
+    .level-${levelCounter + 10} .parent-square .child-square:first-child {
+    
+    }
+    
+    .level-${levelCounter + 10} .parent-square .child-square:nth-child(2) {
+    
+    }
+
+    .level-${levelCounter + 10} .parent-square .child-square:nth-child(3) {
+    
+    }
+
+    .level-${levelCounter + 10} .parent-square .child-square:nth-child(4) {
+    
+    }
+    
+    .level-${levelCounter + 10} .parent-square .child-square:last-child {
+    
     }`];
 
 
@@ -199,6 +221,11 @@ function applyCode() {
         // level 9
         case 8:
         winCondition = levelNineWinCondition();
+        break;
+
+        // level 10
+        case 9:
+        winCondition = levelTenWinCondition();
         break;
     }
 
@@ -354,5 +381,24 @@ function levelNineWinCondition() {
         return true;
     } else {
         return false;   
+    }
+}
+
+
+
+function levelTenWinCondition() {
+    let squareParent = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
+
+    let firstMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:first-child`);
+    let secondMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(2)`);
+    let thirdMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(3)`);
+    let fourthMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(4)`);
+    let fifthMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
+
+
+    if (getComputedStyle(squareParent).justifyContent === "space-between" && getComputedStyle(squareParent).flexDirection === "row-reverse" && getComputedStyle(firstMiniSquare).alignSelf === "flex-start" && getComputedStyle(fifthMiniSquare).alignSelf === "flex-start" && getComputedStyle(secondMiniSquare).alignSelf === "flex-end" && getComputedStyle(fourthMiniSquare).alignSelf === "flex-end" && getComputedStyle(thirdMiniSquare).alignSelf === "center") {
+        return true;
+    } else {
+        return false;
     }
 }

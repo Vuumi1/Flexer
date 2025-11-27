@@ -301,3 +301,33 @@ align-self: center;
 .level-9 .parent-square .child-square:last-child {
 align-self: center;
 }
+
+
+
+/*LEVEL TEN*/
+.level-10 {
+    display: none;
+}
+.level-10 .parent-square {
+    justify-content: center;
+}
+.level-10 .parent-square .child-square {
+    width: calc(100% / 7);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-10 .parent-square .child-square:first-child {
+align-self: center;
+}
+.level-10 .parent-square .child-square:nth-child(2) {
+align-self: center;
+}
+.level-10 .parent-square .child-square:nth-child(3) {
+align-self: center;
+}
+.level-10 .parent-square .child-square:nth-child(4) {
+    align-self: center;
+}
+.level-10 .parent-square .child-square:last-child {
+align-self: center;
+}
