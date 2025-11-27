@@ -67,7 +67,15 @@ body {
     display: flex;
     gap: 5px;
 }
+.child-square.numerated {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
 
+}
 
 
 
@@ -168,6 +176,9 @@ body {
 .level-5 {
     display: none;
 }
+.level-5 .parent-square {
+    flex-direction: column;
+}
 .level-5 .parent-square .child-square {
     width: calc(100% / 3);
     aspect-ratio: 1 / 1;
@@ -182,3 +193,55 @@ body {
 .level-5 .parent-square .child-square:last-child {
     align-self: center;
 }
+
+
+
+
+
+/*LEVEL SIX*/
+.level-6 {
+    display: none;
+}
+.level-6 .parent-square .child-square {
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-6 .parent-square .child-square:first-child {
+    align-self: center;
+}
+.level-6 .parent-square .child-square:nth-child(2) {
+    align-self: center;
+}
+.level-6 .parent-square .child-square:last-child {
+    align-self: center;
+}
+
+
+
+
+/*LEVEL SEVEN*/
+.level-7 {
+    display: none;
+}
+.level-7 .parent-square .child-square {
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-7 .parent-square .child-square:first-child {
+    align-self: flex-end;
+}
+.level-7 .parent-square .child-square:nth-child(2) {
+    align-self: center;
+}
+.level-7 .parent-square .child-square:last-child {
+    align-self: flex-start;
+}
+
+
+
+
+
+
+

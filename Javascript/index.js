@@ -4,7 +4,7 @@ import { css } from "https://esm.sh/@codemirror/lang-css@6.2.1";
 
 let styleSheet = document.getElementById("main-css").sheet;
 const applyButton = document.querySelector("button.apply-btn")
-const allowedCodeWords = ["nth-child" ,"last-child" ,"first-child" ,"child-square","parent-square","display","flex","inline-flex","flex-direction","row","row-reverse","column","column-reverse","flex-wrap","nowrap","wrap","wrap-reverse","flex-flow","justify-content","flex-start","flex-end","center","space-between","space-around","space-evenly","align-items","stretch","baseline","align-content","flex-grow","flex-shrink","flex-basis","auto","none","initial","align-self","order",];
+const allowedCodeWords = ["-" ,"nth-child" ,"last-child" ,"first-child" ,"child-square","parent-square","display","flex","inline-flex","flex-direction","row","row-reverse","column","column-reverse","flex-wrap","nowrap","wrap","wrap-reverse","flex-flow","justify-content","flex-start","flex-end","center","space-between","space-around","space-evenly","align-items","stretch","baseline","align-content","flex-grow","flex-shrink","flex-basis","auto","none","initial","align-self","order"];
 
 let levelCounter = 0;
 let levelStarter = [`.level-${levelCounter + 1} .parent-square {
@@ -22,6 +22,28 @@ let levelStarter = [`.level-${levelCounter + 1} .parent-square {
     }
     
     .level-${levelCounter + 4} .parent-square .child-square:last-child {
+    
+    }`, `.level-${levelCounter + 5} .parent-square .child-square:first-child {
+    
+    }
+    
+    .level-${levelCounter + 5} .parent-square .child-square:nth-child(2) {
+    
+    }
+    
+    .level-${levelCounter + 5} .parent-square .child-square:last-child {
+    
+    }`, `.level-${levelCounter + 6} .parent-square .child-square:first-child {
+    
+    }
+    
+    .level-${levelCounter + 6} .parent-square .child-square:nth-child(2) {
+    
+    }
+    
+    .level-${levelCounter + 6} .parent-square .child-square:last-child {
+    
+    }`, `.level-${levelCounter + 7} .parent-square {
     
     }`];
 
@@ -125,6 +147,21 @@ function applyCode() {
         case 3:
         winCondition = levelFourWinCondition();
         break;
+
+        // level five
+        case 4:
+        winCondition = levelFiveWinCondition();
+        break;
+
+        // level six
+        case 5:
+        winCondition = levelSixWinCondition();
+        break;
+
+        // level seven
+        case 6:
+        winCondition = levelSevenWinCondition();
+        break;
     }
 
     if (winCondition === true) {
@@ -171,7 +208,7 @@ function levelThreeWinCondition() {
 
 
 
-    if (getComputedStyle(squareParent).alignItems === "center" && getComputedStyle(squareParent).flexDirection === "column") {
+    if (getComputedStyle(squareParent).alignItems === "normal" && getComputedStyle(squareParent).flexDirection === "column" || getComputedStyle(squareParent).alignItems === "center" && getComputedStyle(squareParent).flexDirection === "column") {
         return true;
     } else {
         return false;
@@ -187,6 +224,56 @@ function levelFourWinCondition() {
     let thirdMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
 
     if (getComputedStyle(firstMiniSquare).alignSelf === "flex-start" && getComputedStyle(secondMiniSquare).alignSelf === "center" && getComputedStyle(thirdMiniSquare).alignSelf === "flex-end") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+
+function levelFiveWinCondition() {
+    // checking if first square is top left, and third is bottom left, and second is middle
+
+    let firstMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:first-child`);
+    let secondMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(2)`);
+    let thirdMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
+
+
+    if (getComputedStyle(firstMiniSquare).alignSelf === "flex-start", getComputedStyle(secondMiniSquare).alignSelf === "center" && getComputedStyle(thirdMiniSquare).alignSelf === "flex-start") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+
+
+function levelSixWinCondition() {
+    // reverse squares
+
+    let firstMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:first-child`);
+    let secondMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(2)`);
+    let thirdMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
+
+    if (parseInt(getComputedStyle(thirdMiniSquare).order) < parseInt(getComputedStyle(secondMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) < parseInt(getComputedStyle(firstMiniSquare).order)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+function levelSevenWinCondition() {
+    // invert diagonal
+
+    let squareParent = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
+
+    if (getComputedStyle(squareParent).flexDirection === "column-reverse") {
         return true;
     } else {
         return false;
