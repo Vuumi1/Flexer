@@ -245,7 +245,7 @@ body {
 
 
 
-/*LEVEL SEVEN*/
+/*LEVEL EIGHT*/
 .level-8 {
     display: none;
 }
@@ -253,7 +253,7 @@ body {
     flex-direction: column;
 }
 .level-8 .parent-square .child-square {
-    width: calc(100% / 3);
+    width: calc(100% / 4);
     aspect-ratio: 1 / 1;
     background-color: red;
 }
@@ -267,5 +267,37 @@ align-self: center;
 align-self: center;
 }
 .level-8 .parent-square .child-square:last-child {
+align-self: center;
+}
+
+
+
+
+
+
+
+/*LEVEL NINE*/
+.level-9 {
+    display: none;
+}
+.level-9 .parent-square {
+    flex-direction: column;
+    justify-content: center;
+}
+.level-9 .parent-square .child-square {
+    width: calc(100% / 6);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-9 .parent-square .child-square:first-child {
+align-self: center;
+}
+.level-9 .parent-square .child-square:nth-child(2) {
+align-self: center;
+}
+.level-9 .parent-square .child-square:nth-child(3) {
+align-self: center;
+}
+.level-9 .parent-square .child-square:last-child {
 align-self: center;
 }

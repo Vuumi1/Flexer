@@ -63,6 +63,16 @@ let levelStarter = [`.level-${levelCounter + 1} .parent-square {
     
     .level-${levelCounter + 8} .parent-square .child-square:last-child {
     
+    }`, `.level-${levelCounter + 9} .parent-square {
+    
+    }
+
+    .level-${levelCounter + 9} .parent-square .child-square:nth-child(2) {
+    
+    }
+
+    .level-${levelCounter + 9} .parent-square .child-square:nth-child(3) {
+    
     }`];
 
 
@@ -184,6 +194,11 @@ function applyCode() {
         // level 8
         case 7:
         winCondition = levelEightWinCondition();
+        break;
+
+        // level 9
+        case 8:
+        winCondition = levelNineWinCondition();
         break;
     }
 
@@ -315,10 +330,29 @@ function levelEightWinCondition() {
     let fourthMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
 
 
-    if (getComputedStyle(squareParent).flexDirection === "row" && parseInt(getComputedStyle(firstMiniSquare).order) > parseInt(getComputedStyle(fourthMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) === parseInt(getComputedStyle(thirdMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) < parseInt(getComputedStyle(firstMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) > parseInt(getComputedStyle(fourthMiniSquare).order)) {
+    if (getComputedStyle(squareParent).flexDirection === "row" && parseInt(getComputedStyle(firstMiniSquare).order) > parseInt(getComputedStyle(fourthMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) === parseInt(getComputedStyle(thirdMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) < parseInt(getComputedStyle(firstMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) > parseInt(getComputedStyle(fourthMiniSquare).order) && getComputedStyle(firstMiniSquare).alignSelf === "flex-start" && getComputedStyle(fourthMiniSquare).alignSelf === "flex-start" && getComputedStyle(secondMiniSquare).alignSelf === "flex-end" && getComputedStyle(thirdMiniSquare).alignSelf === "flex-end") {
         console.log("that was hard");
         return true;
     } else {
         return false
+    }
+}
+
+
+
+
+function levelNineWinCondition() {
+    let squareParent = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
+
+    let firstMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:first-child`);
+    let secondMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(2)`);
+    let thirdMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(3)`);
+    let fourthMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
+
+    console.log(`${getComputedStyle(squareParent).flexDirection}, ${getComputedStyle(squareParent).justifyContent}, ${getComputedStyle(secondMiniSquare).alignSelf}, getComputedStyle(thirdMiniSquare).alignSelf`)
+    if (getComputedStyle(squareParent).flexDirection === "row" && getComputedStyle(squareParent).justifyContent === "space-between" && getComputedStyle(secondMiniSquare).alignSelf === "flex-end" && getComputedStyle(thirdMiniSquare).alignSelf === "flex-start") {
+        return true;
+    } else {
+        return false;   
     }
 }
