@@ -45,6 +45,24 @@ let levelStarter = [`.level-${levelCounter + 1} .parent-square {
     
     }`, `.level-${levelCounter + 7} .parent-square {
     
+    }`, `.level-${levelCounter + 8} .parent-square {
+    
+    }
+    
+    .level-${levelCounter + 8} .parent-square .child-square:first-child {
+    
+    }
+    
+    .level-${levelCounter + 8} .parent-square .child-square:nth-child(2) {
+    
+    }
+
+    .level-${levelCounter + 8} .parent-square .child-square:nth-child(3) {
+    
+    }
+    
+    .level-${levelCounter + 8} .parent-square .child-square:last-child {
+    
     }`];
 
 
@@ -162,6 +180,11 @@ function applyCode() {
         case 6:
         winCondition = levelSevenWinCondition();
         break;
+
+        // level 8
+        case 7:
+        winCondition = levelEightWinCondition();
+        break;
     }
 
     if (winCondition === true) {
@@ -277,5 +300,25 @@ function levelSevenWinCondition() {
         return true;
     } else {
         return false;
+    }
+}
+
+
+
+function levelEightWinCondition() {
+    // checking if 4 at top left, 1 at top right, 2 and 3 bottom center
+    let squareParent = document.querySelector(`.level-${levelCounter + 1} .parent-square`);
+
+    let firstMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:first-child`);
+    let secondMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(2)`);
+    let thirdMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:nth-child(3)`);
+    let fourthMiniSquare = document.querySelector(`.level-${levelCounter + 1} .parent-square .child-square:last-child`);
+
+
+    if (getComputedStyle(squareParent).flexDirection === "row" && parseInt(getComputedStyle(firstMiniSquare).order) > parseInt(getComputedStyle(fourthMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) === parseInt(getComputedStyle(thirdMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) < parseInt(getComputedStyle(firstMiniSquare).order) && parseInt(getComputedStyle(secondMiniSquare).order) > parseInt(getComputedStyle(fourthMiniSquare).order)) {
+        console.log("that was hard");
+        return true;
+    } else {
+        return false
     }
 }

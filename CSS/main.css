@@ -245,3 +245,27 @@ body {
 
 
 
+/*LEVEL SEVEN*/
+.level-8 {
+    display: none;
+}
+.level-8 .parent-square {
+    flex-direction: column;
+}
+.level-8 .parent-square .child-square {
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    background-color: red;
+}
+.level-8 .parent-square .child-square:first-child {
+align-self: center;
+}
+.level-8 .parent-square .child-square:nth-child(2) {
+align-self: center;
+}
+.level-8 .parent-square .child-square:nth-child(3) {
+align-self: center;
+}
+.level-8 .parent-square .child-square:last-child {
+align-self: center;
+}
