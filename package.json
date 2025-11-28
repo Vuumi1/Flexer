@@ -1,0 +1,26 @@
+{
+  "name": "flexer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vuumi1/Flexer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Vuumi1/Flexer/issues"
+  },
+  "homepage": "https://github.com/Vuumi1/Flexer#readme",
+  "dependencies": {
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/view": "^6.38.8",
+    "codemirror-readonly-ranges": "^0.1.0-alpha.2"
+  }
+}

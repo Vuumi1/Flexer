@@ -2,6 +2,9 @@ import { EditorView, basicSetup } from "https://esm.sh/codemirror@6.0.2";
 import { css } from "https://esm.sh/@codemirror/lang-css@6.2.1";
 
 
+
+
+
 let styleSheet = document.getElementById("main-css").sheet;
 const applyButton = document.querySelector("button.apply-btn")
 const allowedCodeWords = ["-" ,"nth-child" ,"last-child" ,"first-child" ,"child-square","parent-square","display","flex","inline-flex","flex-direction","row","row-reverse","column","column-reverse","flex-wrap","nowrap","wrap","wrap-reverse","flex-flow","justify-content","flex-start","flex-end","center","space-between","space-around","space-evenly","align-items","stretch","baseline","align-content","flex-grow","flex-shrink","flex-basis","auto","none","initial","align-self","order"];
@@ -103,7 +106,18 @@ let cssEditor = new EditorView({
     doc: levelStarter[levelCounter],
     extensions: [basicSetup, css()],
     parent: document.getElementById("parentCodeWindow")
-});
+})
+
+
+
+function readOnlyCode(editorState) {
+    switch(levelCounter) {
+        case 0:
+        return [{from: 0, to: editorState.doc.line(1).to}]
+    }
+}
+
+
 function levelProgressFunc() {
     if (document.querySelector(`.level-${levelCounter + 2}`)) {
         // hiding current level
